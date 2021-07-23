@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Item, NgxWheelComponent, TextAlignment, TextOrientation } from "ngx-wheel";
 
 @Component({
@@ -20,16 +20,25 @@ export class AppComponent implements OnInit {
     {text: 'Limo', fillStyle: '#b7ad50', id: 2},
     {text: 'Koupačka', fillStyle: '#4579b8', id: 3},
     {text: 'Jídlo', fillStyle: '#887a74', id: 4},
-    {text: 'Houpačka z mostu', fillStyle: '#eda0f1', id: 4},
+    {text: 'Houpačka', fillStyle: '#eda0f1', id: 4},
     {text: 'Lodě', fillStyle: '#e2f1a0', id: 4},
   ];
   public textOrientation: TextOrientation = TextOrientation.HORIZONTAL;
   public textAlignment: TextAlignment = TextAlignment.CENTER;
   public idToLandOn: any;
   private seed = [...Array(this.items.length).keys()]
+  private innerWidth: any;
 
   ngOnInit() {
     this.idToLandOn = this.seed[Math.floor(Math.random() * this.seed.length)];
+    this.setInnerWidth();
+  }
+
+  setInnerWidth() {
+    this.innerWidth = window.innerWidth;
+    console.log(this.innerWidth);
+    this.width = innerWidth < this.width ? innerWidth : 600;
+    this.height = this.width;
   }
 
   onSpin() {
